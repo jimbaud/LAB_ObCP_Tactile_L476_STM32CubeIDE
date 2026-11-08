@@ -6,9 +6,9 @@ Un seul firmware lance un Paint, une groovebox et trois jeux à inclinaison de d
 
 À l’allumage, un accueil fixe présente le logo SUPMICROTECH pendant environ 3,2 s, puis ouvre le menu ou le calibrage demandé. Les six boutons du menu partagent leurs dimensions et leur police. La signature **J. Imbaud - SUPMICROTECH - CROC** est centrée en bas.
 
-Le programme lit l’identifiant de l’ILI9341 et reconnaît séparément le tactile. Il accepte le **1947 capacitif FT62xx**, le **1651 résistif TSC2007** et l’**ancien 1651 résistif STMPE610**. Pour les modèles résistifs, le calibrage à quatre cibles est conservé en flash. Le brochage et les ponts à contrôler dépendent de la révision. [Montage matériel](docs/MATERIEL.md)
+Le programme lit l’identifiant de l’ILI9341 et reconnaît séparément le tactile. Il accepte le **1947 capacitif FT62xx**, le **1651 résistif TSC2007** et l’**ancien 1651 résistif STMPE610**. Pour les modèles résistifs, le calibrage à quatre cibles est conservé en flash. Le brochage et les ponts à contrôler dépendent de la révision. [Montage matériel](ObCP_Tactile_1947/docs/MATERIEL.md)
 
-![Menu de l’ObCP tactile rendu sur PC à partir du code du projet](docs/images/menu.png)
+![Menu de l’ObCP tactile rendu sur PC à partir du code du projet](ObCP_Tactile_1947/docs/images/menu.png)
 
 *Capture 320 × 240 produite sur PC par le moteur graphique du firmware.*
 
@@ -18,9 +18,9 @@ Cette version développe la documentation de tout le code applicatif. Les **243 
 
 Les en-têtes fournissent les contrats Doxygen. Les fichiers C expliquent ensuite les algorithmes et les décisions délicates, notamment le calibrage affine, le masquage des pixels, les collisions, la synthèse DDS, le partage DMA et la validation flash A/B. Les crochets CubeMX, le linker, les tests et les outils Python disposent aussi d’explications. Les composants HAL/CMSIS conservent leur documentation d’origine.
 
-La référence de langage est **C11**, avec la chaîne GNU Arm pour le firmware. **Doxygen est la convention de documentation** utilisée pour extraire les contrats. Le [guide des conventions](docs/CONVENTIONS.md) précise la portée de ces choix et les vérifications effectuées.
+La référence de langage est **C11**, avec la chaîne GNU Arm pour le firmware. **Doxygen est la convention de documentation** utilisée pour extraire les contrats. Le [guide des conventions](ObCP_Tactile_1947/docs/CONVENTIONS.md) précise la portée de ces choix et les vérifications effectuées.
 
-Pour commencer, suivre [le parcours de lecture du code](docs/LIRE_LE_CODE.md), puis [le guide des pilotes](docs/PILOTES.md). L’[API HTML déjà générée](docs/api/index.html) s’ouvre hors connexion après extraction du projet. Sur GitHub, télécharger le dossier ou régénérer les pages pour les consulter dans un navigateur.
+Pour commencer, suivre [le parcours de lecture du code](ObCP_Tactile_1947/docs/LIRE_LE_CODE.md), puis [le guide des pilotes](ObCP_Tactile_1947/docs/PILOTES.md). L’[API HTML déjà générée](ObCP_Tactile_1947/docs/api/index.html) s’ouvre hors connexion après extraction du projet. Sur GitHub, télécharger le dossier ou régénérer les pages pour les consulter dans un navigateur.
 
 ## Sommaire
 
@@ -37,7 +37,7 @@ Pour commencer, suivre [le parcours de lecture du code](docs/LIRE_LE_CODE.md), p
 ## Mise en route sur Windows 11
 
 1. Extraire le dossier `ObCP_Tactile_1947` dans un chemin de travail local. Le dossier contient `.project`, `.cproject` et `ObCP_Tactile_1947.ioc`.
-2. Vérifier le routage SPI du shield selon le [montage matériel](docs/MATERIEL.md). Commencer avec l’ObCP alimentée par USB et le shield installé. Le diagnostic écran et tactile se fait avec l’étage audio débranché.
+2. Vérifier le routage SPI du shield selon le [montage matériel](ObCP_Tactile_1947/docs/MATERIEL.md). Commencer avec l’ObCP alimentée par USB et le shield installé. Le diagnostic écran et tactile se fait avec l’étage audio débranché.
 3. Dans STM32CubeIDE, ouvrir **File → Import → General → Existing Projects into Workspace**. Sélectionner le dossier extrait. Choisir **Debug** ou **Release**, puis **Project → Build Project**.
 4. Pour le premier chargement, utiliser `binaires/Release/ObCP_Tactile_1947.hex` avec STM32CubeProgrammer ou charger l’ELF Debug via ST-LINK. Sur une carte qui contient déjà un autre projet, relever ou sauvegarder son contenu avant le chargement. Sélectionner un effacement ciblé des pages programme si les données de ce projet doivent survivre à une mise à jour.
 5. Après l’accueil, avec un 1651 sans profil en flash, maintenir le doigt au centre de la cible jaune jusqu’à l’indication **Relâcher**. Répéter pour les quatre cibles. La dernière contrôle le calibrage avant sa sauvegarde. **Paramètres → Calibrer** permet de reprendre la mesure.
@@ -45,7 +45,7 @@ Pour commencer, suivre [le parcours de lecture du code](docs/LIRE_LE_CODE.md), p
 
 Les sources et commentaires sont en UTF-8. Si les accents sont mal affichés dans CubeIDE, sélectionner **Project → Properties → Resource → Text file encoding → UTF-8**.
 
-Pour mettre à jour une v0.3.0 ou v0.4.0, programmer l’HEX en limitant l’effacement aux pages programme de la **banque 1**. La v0.4.1 relit les dessins, les motifs, le calibrage tactile, les axes et les réglages déjà enregistrés. Le dossier CubeIDE est `ObCP_Tactile_1947`. [Plan mémoire](docs/ARCHITECTURE.md#la-mémoire-de-sauvegarde)
+Pour mettre à jour une v0.3.0 ou v0.4.0, programmer l’HEX en limitant l’effacement aux pages programme de la **banque 1**. La v0.4.1 relit les dessins, les motifs, le calibrage tactile, les axes et les réglages déjà enregistrés. Le dossier CubeIDE est `ObCP_Tactile_1947`. [Plan mémoire](ObCP_Tactile_1947/docs/ARCHITECTURE.md#la-mémoire-de-sauvegarde)
 
 Pour la programmation USB DFU de l’ObCP, mettre **SW2 sur On**, **SW4 sur Prog** et appuyer sur **SW3**. Choisir **USB** dans CubeProgrammer et charger le fichier HEX. Remettre **SW4 sur Run** et appuyer sur **SW3**. Avec un fichier BIN, l’adresse de départ est `0x08000000`. Pour le SWD, utiliser les signaux de J17 et une référence 3,3 V prise sur la carte. [Procédure ObCP d’origine](https://github.com/jimbaud/LAB_ObCP_L476_STM32CubeIDE/tree/cef4cdae9e7564ef920e2c2c74603c82b863f89c/OBCP_template_2026)
 
@@ -58,7 +58,7 @@ Pour la programmation USB DFU de l’ObCP, mettre **SW2 sur On**, **SW4 sur Prog
 | Course auto | Le premier objectif est 50 dépassements. Les motos apparaissent au niveau 3, les fourgonnettes au niveau 5 et les camions au niveau 7. Une collision déclenche l’éclat **BOUM!** pendant 0,9 s. |
 | Paramètres | **Réactivité** règle X et Y de 1 à 10. **Axes jeux** règle leur sens. **Calibrer** traite le tactile résistif. **Diagnostic** donne accès aux mires, au neutre et à la note de 440 Hz. |
 
-Le haut-parleur se raccorde aux bornes de l’ampli. L’interface décrite dans [le montage matériel](docs/MATERIEL.md) récupère la PWM de J13, la filtre et alimente l’entrée audio.
+Le haut-parleur se raccorde aux bornes de l’ampli. L’interface décrite dans [le montage matériel](ObCP_Tactile_1947/docs/MATERIEL.md) récupère la PWM de J13, la filtre et alimente l’entrée audio.
 
 ## Fonctionnement du programme
 
@@ -81,7 +81,7 @@ flowchart TD
 
 ### Exemple, toucher Paint
 
-![Menu annoté et fonctions à retrouver](docs/images/guide-menu.png)
+![Menu annoté et fonctions à retrouver](ObCP_Tactile_1947/docs/images/guide-menu.png)
 
 Le contrôleur fournit un contact brut. `sample_touch()` applique le filtre et la conversion de repère. `touch_update()` produit `TOUCH_DOWN`. `app_touch()` repère le bouton et appelle `app_open()` avec `SCREEN_PAINT`. L’ouverture prépare le modèle et demande un écran complet avec `damage_full()`. Aux tours suivants, `app_render()` compose les bandes du nouvel écran.
 
@@ -110,7 +110,7 @@ L’écran complet demanderait 153 600 octets en RGB565. Le tampon du renderer c
 | Flash interne | `Storage`, callbacks `read/erase/program` | Offsets en octets, pages de 2 Kio, double mot de huit octets |
 | PWM audio TIM1 | `pwm_audio_task` | Consommation de 15 625 échantillons/s dans un anneau DMA |
 
-Le [guide des pilotes](docs/PILOTES.md) explique les registres, les adresses I²C, les sélections SPI, les conversions, les erreurs et les échanges avec la HAL. Le guide de lecture suit ensuite chaque donnée jusque dans le modèle.
+Le [guide des pilotes](ObCP_Tactile_1947/docs/PILOTES.md) explique les registres, les adresses I²C, les sélections SPI, les conversions, les erreurs et les échanges avec la HAL. Le guide de lecture suit ensuite chaque donnée jusque dans le modèle.
 
 ### Sauvegarder sans perdre la dernière copie valide
 
@@ -127,7 +127,7 @@ flowchart TD
     F -->|Non| H["Signaler l’erreur"]
 ```
 
-Le [parcours de lecture](docs/LIRE_LE_CODE.md#9-comprendre-la-sauvegarde-ab) présente l’en-tête de 32 octets et la chronologie A/B. Les tests injectent des coupures au cours de l’effacement, de la programmation et de la validation.
+Le [parcours de lecture](ObCP_Tactile_1947/docs/LIRE_LE_CODE.md#9-comprendre-la-sauvegarde-ab) présente l’en-tête de 32 octets et la chronologie A/B. Les tests injectent des coupures au cours de l’effacement, de la programmation et de la validation.
 
 ### Comprendre l’audio et les jeux
 
@@ -137,9 +137,9 @@ L’inclinaison est recentrée, filtrée, projetée vers les axes écran puis bo
 
 ### Lire le diagnostic
 
-![Diagnostic annoté et chemins de données](docs/images/guide-diagnostic.png)
+![Diagnostic annoté et chemins de données](ObCP_Tactile_1947/docs/images/guide-diagnostic.png)
 
-Les champs affichés sont conservés dans `Diagnostics`. La structure volatile `obcp_live` en expose les valeurs et les compteurs au débogueur. Elle permet de distinguer identifiant TFT, reconnaissance tactile, position brute, position convertie, état d’inclinaison et incidents de transfert. Les [tableaux de diagnostic](docs/MATERIEL.md#distinguer-lécran-et-le-tactile) relient les symptômes aux mesures.
+Les champs affichés sont conservés dans `Diagnostics`. La structure volatile `obcp_live` en expose les valeurs et les compteurs au débogueur. Elle permet de distinguer identifiant TFT, reconnaissance tactile, position brute, position convertie, état d’inclinaison et incidents de transfert. Les [tableaux de diagnostic](ObCP_Tactile_1947/docs/MATERIEL.md#distinguer-lécran-et-le-tactile) relient les symptômes aux mesures.
 
 ## Répertoire du code
 
@@ -147,43 +147,43 @@ Lire d’abord l’en-tête pour connaître le contrat, puis le fichier C pour s
 
 | Source | Interface | Responsabilité et premières fonctions à lire |
 | --- | --- | --- |
-| [main.c](Core/Src/main.c) | [obcp_board.h](Core/Inc/obcp_board.h) | Ordre d’initialisation et boucle ; `obcp_start`, `obcp_task` |
-| [board.c](Core/Src/obcp/board.c) | [obcp_board.h](Core/Inc/obcp_board.h) | Ordonnancement ; `sample_touch`, `sample_inputs`, `update_rates` |
-| [app.c](Core/Src/obcp/app.c) | [obcp_app.h](Core/Inc/obcp_app.h) | Pages, événements et dialogues ; `app_open`, `app_touch`, `app_step`, `app_render` |
-| [gfx.c](Core/Src/obcp/gfx.c) | [obcp_gfx.h](Core/Inc/obcp_gfx.h) | Géométrie et rendu ; `gfx_pixel`, `damage_add`, `renderer_task` |
-| [ili9341.c](Core/Src/obcp/ili9341.c) | [obcp_panel.h](Core/Inc/obcp_panel.h) | Écran et DMA SPI1 ; `lcd_init`, `send_band`, `poll_band` |
-| [touch_port.c](Core/Src/obcp/touch_port.c) | [obcp_panel.h](Core/Inc/obcp_panel.h) | Façade de détection ; `touch_probe`, `touch_read` |
-| [ft6206.c](Core/Src/obcp/ft6206.c) | [touch_drivers.h](Core/Src/obcp/touch_drivers.h) | Registres capacitifs ; `ft6206_probe`, `ft6206_sample` |
-| [stmpe610.c](Core/Src/obcp/stmpe610.c) | [touch_drivers.h](Core/Src/obcp/touch_drivers.h) | Résistif SPI et FIFO ; `stmpe610_probe`, `stmpe610_sample` |
-| [tsc2007.c](Core/Src/obcp/tsc2007.c) | [touch_drivers.h](Core/Src/obcp/touch_drivers.h) | Résistif I²C ; `tsc2007_probe`, `tsc2007_sample` |
-| [input.c](Core/Src/obcp/input.c) | [obcp_input.h](Core/Inc/obcp_input.h) | Événements, filtres et axes ; `touch_update`, `tilt_sample`, `tilt_project` |
-| [calibration.c](Core/Src/obcp/calibration.c) | [obcp_calibration.h](Core/Inc/obcp_calibration.h) | Cibles et transformation affine ; `touch_cal_fit`, `touch_cal_sample` |
-| [accelerometer.c](Core/Src/obcp/accelerometer.c) | [accelerometer.h](Core/Inc/accelerometer.h) | Capteur SPI3 ; `accel_init`, `accel_read` |
-| [paint.c](Core/Src/obcp/paint.c) | [obcp_paint.h](Core/Inc/obcp_paint.h) | Canevas et palette ; `paint_segment`, `paint_draw`, `paint_save` |
-| [maze.c](Core/Src/obcp/maze.c) | [obcp_games.h](Core/Inc/obcp_games.h) | Bille et murs ; `maze_solid`, `maze_step` |
-| [breakout.c](Core/Src/obcp/breakout.c) | [obcp_games.h](Core/Inc/obcp_games.h) | Raquette et impacts ; `move_ball`, `breakout_step` |
-| [race.c](Core/Src/obcp/race.c) | [obcp_games.h](Core/Inc/obcp_games.h) | Trafic et collision ; `spawn`, `race_step`, `draw_crash` |
-| [audio.c](Core/Src/obcp/audio.c) | [obcp_audio.h](Core/Inc/obcp_audio.h) | Voix et séquenceur ; `render_voice`, `audio_fill`, `book_encode` |
-| [pwm_audio.c](Core/Src/obcp/pwm_audio.c) | [obcp_pwm.h](Core/Inc/obcp_pwm.h) | Transport timer/DMA ; `start`, `half_done`, `pwm_audio_task` |
-| [storage.c](Core/Src/obcp/storage.c) | [obcp_storage.h](Core/Inc/obcp_storage.h) | Copies A/B ; `inspect`, `active_copy`, `storage_save` |
-| [flash_port.c](Core/Src/obcp/flash_port.c) | [obcp_flash.h](Core/Inc/obcp_flash.h) | HAL flash et ECC ; `obcp_flash_ready`, `flash_program` |
-| [logo.c](Core/Src/obcp/logo.c) | [obcp_logo.h](Core/Inc/obcp_logo.h) | Ressource RLE ; `logo_draw` |
+| [main.c](ObCP_Tactile_1947/Core/Src/main.c) | [obcp_board.h](ObCP_Tactile_1947/Core/Inc/obcp_board.h) | Ordre d’initialisation et boucle ; `obcp_start`, `obcp_task` |
+| [board.c](ObCP_Tactile_1947/Core/Src/obcp/board.c) | [obcp_board.h](ObCP_Tactile_1947/Core/Inc/obcp_board.h) | Ordonnancement ; `sample_touch`, `sample_inputs`, `update_rates` |
+| [app.c](ObCP_Tactile_1947/Core/Src/obcp/app.c) | [obcp_app.h](ObCP_Tactile_1947/Core/Inc/obcp_app.h) | Pages, événements et dialogues ; `app_open`, `app_touch`, `app_step`, `app_render` |
+| [gfx.c](ObCP_Tactile_1947/Core/Src/obcp/gfx.c) | [obcp_gfx.h](ObCP_Tactile_1947/Core/Inc/obcp_gfx.h) | Géométrie et rendu ; `gfx_pixel`, `damage_add`, `renderer_task` |
+| [ili9341.c](ObCP_Tactile_1947/Core/Src/obcp/ili9341.c) | [obcp_panel.h](ObCP_Tactile_1947/Core/Inc/obcp_panel.h) | Écran et DMA SPI1 ; `lcd_init`, `send_band`, `poll_band` |
+| [touch_port.c](ObCP_Tactile_1947/Core/Src/obcp/touch_port.c) | [obcp_panel.h](ObCP_Tactile_1947/Core/Inc/obcp_panel.h) | Façade de détection ; `touch_probe`, `touch_read` |
+| [ft6206.c](ObCP_Tactile_1947/Core/Src/obcp/ft6206.c) | [touch_drivers.h](ObCP_Tactile_1947/Core/Src/obcp/touch_drivers.h) | Registres capacitifs ; `ft6206_probe`, `ft6206_sample` |
+| [stmpe610.c](ObCP_Tactile_1947/Core/Src/obcp/stmpe610.c) | [touch_drivers.h](ObCP_Tactile_1947/Core/Src/obcp/touch_drivers.h) | Résistif SPI et FIFO ; `stmpe610_probe`, `stmpe610_sample` |
+| [tsc2007.c](ObCP_Tactile_1947/Core/Src/obcp/tsc2007.c) | [touch_drivers.h](ObCP_Tactile_1947/Core/Src/obcp/touch_drivers.h) | Résistif I²C ; `tsc2007_probe`, `tsc2007_sample` |
+| [input.c](ObCP_Tactile_1947/Core/Src/obcp/input.c) | [obcp_input.h](ObCP_Tactile_1947/Core/Inc/obcp_input.h) | Événements, filtres et axes ; `touch_update`, `tilt_sample`, `tilt_project` |
+| [calibration.c](ObCP_Tactile_1947/Core/Src/obcp/calibration.c) | [obcp_calibration.h](ObCP_Tactile_1947/Core/Inc/obcp_calibration.h) | Cibles et transformation affine ; `touch_cal_fit`, `touch_cal_sample` |
+| [accelerometer.c](ObCP_Tactile_1947/Core/Src/obcp/accelerometer.c) | [accelerometer.h](ObCP_Tactile_1947/Core/Inc/accelerometer.h) | Capteur SPI3 ; `accel_init`, `accel_read` |
+| [paint.c](ObCP_Tactile_1947/Core/Src/obcp/paint.c) | [obcp_paint.h](ObCP_Tactile_1947/Core/Inc/obcp_paint.h) | Canevas et palette ; `paint_segment`, `paint_draw`, `paint_save` |
+| [maze.c](ObCP_Tactile_1947/Core/Src/obcp/maze.c) | [obcp_games.h](ObCP_Tactile_1947/Core/Inc/obcp_games.h) | Bille et murs ; `maze_solid`, `maze_step` |
+| [breakout.c](ObCP_Tactile_1947/Core/Src/obcp/breakout.c) | [obcp_games.h](ObCP_Tactile_1947/Core/Inc/obcp_games.h) | Raquette et impacts ; `move_ball`, `breakout_step` |
+| [race.c](ObCP_Tactile_1947/Core/Src/obcp/race.c) | [obcp_games.h](ObCP_Tactile_1947/Core/Inc/obcp_games.h) | Trafic et collision ; `spawn`, `race_step`, `draw_crash` |
+| [audio.c](ObCP_Tactile_1947/Core/Src/obcp/audio.c) | [obcp_audio.h](ObCP_Tactile_1947/Core/Inc/obcp_audio.h) | Voix et séquenceur ; `render_voice`, `audio_fill`, `book_encode` |
+| [pwm_audio.c](ObCP_Tactile_1947/Core/Src/obcp/pwm_audio.c) | [obcp_pwm.h](ObCP_Tactile_1947/Core/Inc/obcp_pwm.h) | Transport timer/DMA ; `start`, `half_done`, `pwm_audio_task` |
+| [storage.c](ObCP_Tactile_1947/Core/Src/obcp/storage.c) | [obcp_storage.h](ObCP_Tactile_1947/Core/Inc/obcp_storage.h) | Copies A/B ; `inspect`, `active_copy`, `storage_save` |
+| [flash_port.c](ObCP_Tactile_1947/Core/Src/obcp/flash_port.c) | [obcp_flash.h](ObCP_Tactile_1947/Core/Inc/obcp_flash.h) | HAL flash et ECC ; `obcp_flash_ready`, `flash_program` |
+| [logo.c](ObCP_Tactile_1947/Core/Src/obcp/logo.c) | [obcp_logo.h](ObCP_Tactile_1947/Core/Inc/obcp_logo.h) | Ressource RLE ; `logo_draw` |
 
 | Autres éléments | Rôle |
 | --- | --- |
-| [obcp_config.h](Core/Inc/obcp_config.h), [obcp_touch.h](Core/Inc/obcp_touch.h) | Orientation initiale et types communs du tactile |
-| [ObCP_Flash.ld](Linker/ObCP_Flash.ld) | Placement programme, RAM et réserve de sauvegarde |
-| [Tests/test_obcp.c](Tests/test_obcp.c), [Tests/test_touch_bus.c](Tests/test_touch_bus.c) | Scénarios pédagogiques, flash simulée, faux bus et captures |
-| [Tools/verif_cubemx.py](Tools/verif_cubemx.py) | Contrôle du projet, des crochets et du placement de l’image |
-| [Tools/verif_documentation.py](Tools/verif_documentation.py) | Contrôle des contrats extraits dans le XML Doxygen |
-| [Tools/generer_captures.py](Tools/generer_captures.py) | Conversion PPM vers PNG et planches annotées |
-| [Tools/import_logo.py](Tools/import_logo.py), [modèle C](Tools/templates/logo.c.in) | Conversion et compression du logo en conservant ses commentaires |
+| [obcp_config.h](ObCP_Tactile_1947/Core/Inc/obcp_config.h), [obcp_touch.h](ObCP_Tactile_1947/Core/Inc/obcp_touch.h) | Orientation initiale et types communs du tactile |
+| [ObCP_Flash.ld](ObCP_Tactile_1947/Linker/ObCP_Flash.ld) | Placement programme, RAM et réserve de sauvegarde |
+| [Tests/test_obcp.c](ObCP_Tactile_1947/Tests/test_obcp.c), [Tests/test_touch_bus.c](ObCP_Tactile_1947/Tests/test_touch_bus.c) | Scénarios pédagogiques, flash simulée, faux bus et captures |
+| [Tools/verif_cubemx.py](ObCP_Tactile_1947/Tools/verif_cubemx.py) | Contrôle du projet, des crochets et du placement de l’image |
+| [Tools/verif_documentation.py](ObCP_Tactile_1947/Tools/verif_documentation.py) | Contrôle des contrats extraits dans le XML Doxygen |
+| [Tools/generer_captures.py](ObCP_Tactile_1947/Tools/generer_captures.py) | Conversion PPM vers PNG et planches annotées |
+| [Tools/import_logo.py](ObCP_Tactile_1947/Tools/import_logo.py), [modèle C](ObCP_Tactile_1947/Tools/templates/logo.c.in) | Conversion et compression du logo en conservant ses commentaires |
 
 ## Lire les commentaires et l’API
 
 `@brief` résume le rôle. `@param[in]` décrit une donnée lue, `@param[out]` un résultat et `@param[in,out]` un état modifiable. `@return` explique les résultats possibles. Les unités et les capacités attendues sont précisées dans le texte. `/**< ... */` rattache une explication au champ qui précède.
 
-Pour un débutant, commencer par `Rect`, `TouchEvent` et `Paint`, puis suivre une commande depuis `app_touch`. Le [parcours de lecture](docs/LIRE_LE_CODE.md) explique les pointeurs, structures, masques de bits, unités et contextes d’exécution à mesure qu’ils apparaissent.
+Pour un débutant, commencer par `Rect`, `TouchEvent` et `Paint`, puis suivre une commande depuis `app_touch`. Le [parcours de lecture](ObCP_Tactile_1947/docs/LIRE_LE_CODE.md) explique les pointeurs, structures, masques de bits, unités et contextes d’exécution à mesure qu’ils apparaissent.
 
 Avec Doxygen et Graphviz installés, exécuter depuis le dossier projet.
 
@@ -194,13 +194,13 @@ python3 Tools/verif_documentation.py
 
 Ouvrir `build/documentation/html/index.html`. Les pages regroupent les modules, leurs types, leurs fonctions et leur code source commenté. Les graphes d’appels aident à suivre les dépendances. La copie générée livrée est dans `docs/api`. La configuration signale les descriptions et paramètres manquants, et le contrôle XML déduplique chaque fonction entre sa déclaration et sa définition.
 
-Les [conventions de code et de documentation](docs/CONVENTIONS.md) donnent les règles détaillées, leurs limites et les références officielles C11 et Doxygen.
+Les [conventions de code et de documentation](ObCP_Tactile_1947/docs/CONVENTIONS.md) donnent les règles détaillées, leurs limites et les références officielles C11 et Doxygen.
 
 ## Régler la commande des jeux
 
 Dans **Paramètres → Réactivité**, les axes X et Y se règlent indépendamment de 1 à 10. Une valeur élevée augmente le gain et réduit le lissage. Le défaut est **6/10** sur chaque axe. Le réglage agit immédiatement, puis **Enregistrer** le conserve en flash. Le casse-briques et la course utilisent X. Le labyrinthe utilise les deux axes.
 
-![Réglage de la réactivité X et Y, capture PC](docs/images/reactivite.png)
+![Réglage de la réactivité X et Y, capture PC](ObCP_Tactile_1947/docs/images/reactivite.png)
 
 Pour adapter le sens au montage, ouvrir **Paramètres → Axes jeux**. Garder l’écran en paysage face à soi.
 
@@ -209,7 +209,7 @@ Pour adapter le sens au montage, ouvrir **Paramètres → Axes jeux**. Garder l�
 3. Abaisser le bord du bas et attendre l’aperçu. Vérifier que le point jaune suit le bord abaissé. Choisir **Refaire** pour recommencer.
 4. Reposer la carte à plat et toucher **Enregistrer**. Les trois jeux utilisent ce réglage, conservé au redémarrage. **Paramètres → Diagnostic → Neutre** reprend la position de repos.
 
-![Aperçu des axes des jeux et boutons de validation, capture PC](docs/images/axes.png)
+![Aperçu des axes des jeux et boutons de validation, capture PC](ObCP_Tactile_1947/docs/images/axes.png)
 
 Avec un calibrage résistif qui empêche de viser les boutons, maintenir un doigt sur la dalle dès la mise sous tension ou le reset jusqu’à l’apparition du guide, puis relâcher avant de viser la première cible. Ce secours s’active après environ 1,3 s de contact continu quand le contrôleur résistif est reconnu.
 
@@ -225,9 +225,9 @@ La LED verte s’allume pendant 300 ms après une initialisation ou une opérati
 
 Après une défaite, **Rejouer** reprend le niveau en cours et **Menu principal** quitte le jeu. Après une victoire, **Niveau suivant** poursuit la progression. À la dernière victoire, **Recommencer** repart au niveau 1, comme une nouvelle ouverture depuis le menu. Le bouton **Menu principal** est aussi disponible en pause. Pendant le bref éclat de collision de la course, **< Menu** reste accessible dans le bandeau.
 
-Le [guide des jeux et du dessin](docs/JEUX_ET_DESSIN.md) présente les dix niveaux de chaque jeu, les réglages, les tailles de trait et l’édition RVB. La palette contient 16 couleurs personnalisables. Modifier une case recolore tous les traits qui l’utilisent.
+Le [guide des jeux et du dessin](ObCP_Tactile_1947/docs/JEUX_ET_DESSIN.md) présente les dix niveaux de chaque jeu, les réglages, les tailles de trait et l’édition RVB. La palette contient 16 couleurs personnalisables. Modifier une case recolore tous les traits qui l’utilisent.
 
-![Écran de défaite avec les boutons Rejouer et Menu principal, capture PC](docs/images/defaite.png)
+![Écran de défaite avec les boutons Rejouer et Menu principal, capture PC](ObCP_Tactile_1947/docs/images/defaite.png)
 
 ## Régénérer avec STM32CubeMX autonome
 
@@ -247,7 +247,7 @@ python .\Tools\verif_cubemx.py --retablir-lien
 
 Le script de liaison est conservé dans `Linker/`. Il borne le firmware à la banque 1 et expose les symboles des pages de données. Le code applicatif est dans `Core/Src/obcp/` et les crochets restent dans les blocs `USER CODE` de `main.c` et `stm32l4xx_it.c`. La vérification compare le brochage, les requêtes DMA, les crochets et le script de liaison.
 
-La commande officielle **generate code** de CubeMX a permis de régénérer les sources sur une copie propre. Le journal d’essai et la recette précisent la portée de cette vérification. [Recette et résultats](docs/RECETTE.md) · [Documentation CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
+La commande officielle **generate code** de CubeMX a permis de régénérer les sources sur une copie propre. Le journal d’essai et la recette précisent la portée de cette vérification. [Recette et résultats](ObCP_Tactile_1947/docs/RECETTE.md) · [Documentation CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
 
 ## Vérifications reproductibles
 
